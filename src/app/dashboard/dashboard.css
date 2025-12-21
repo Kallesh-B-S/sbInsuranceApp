@@ -1,0 +1,168 @@
+:host {
+  /* THEME SYNCED WITH NAVBAR */
+  --bg-slate: #0f172a;       /* Deep Midnight */
+  --card-slate: #1e293b;     /* Slate Blue Card */
+  --accent-orange: #ff8c33;  /* Eye-friendly Orange */
+  --text-primary: #f1f5f9;   /* Soft Off-white */
+  --text-secondary: #94a3b8; /* Muted Slate */
+  --border-muted: #334155;   /* Subtle Border */
+
+  display: block;
+  background-color: var(--bg-slate);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.dashboard-grid {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid { padding: 2rem; }
+}
+
+/* KPI CARDS */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: var(--card-slate);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-muted);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card:hover {
+  border-color: var(--text-secondary);
+  background: #243045;
+  transform: translateY(-2px);
+}
+
+.active-card {
+  border-color: var(--accent-orange) !important;
+  background: rgba(255, 140, 51, 0.05) !important;
+}
+
+.active-card::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 40px;
+  background: linear-gradient(45deg, transparent 50%, var(--accent-orange) 50%);
+  opacity: 0.1;
+}
+
+.label { color: var(--text-secondary); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.value { font-size: 2rem; font-weight: 800; margin: 0.5rem 0; color: var(--text-primary); }
+.trend-link { 
+  display: flex; 
+  align-items: center; 
+  gap: 4px; 
+  color: var(--accent-orange); 
+  font-size: 0.85rem; 
+  font-weight: 500; 
+}
+.trend-link mat-icon { font-size: 16px; width: 16px; height: 16px; }
+
+/* TABLE CARD */
+.glass-card {
+  background: var(--card-slate);
+  border: 1px solid var(--border-muted);
+  border-radius: 12px;
+  padding: 0; /* Header and table handle padding */
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.card-header h2 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+
+.table-responsive-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.custom-table {
+  background: transparent !important;
+  width: 100%;
+}
+
+/* Material Table Overrides */
+::ng-deep .mat-mdc-header-cell {
+  background: rgba(15, 23, 42, 0.4) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  font-size: 0.75rem !important;
+  border-bottom: 1px solid var(--border-muted) !important;
+  padding: 1rem !important;
+}
+
+::ng-deep .mat-mdc-cell {
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 1rem !important;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* LINKS & BUTTONS */
+.orange-link {
+  color: var(--accent-orange);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.orange-link:hover { opacity: 0.8; text-decoration: underline; }
+
+.btn-orange {
+  background: var(--accent-orange);
+  color: #000; /* High contrast black for text on orange */
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-orange:hover { transform: scale(1.02); background: #ffa159; }
+.btn-orange mat-icon { font-size: 18px; width: 18px; height: 18px; }
+
+/* BADGES */
+.badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-active { background: rgba(52, 211, 153, 0.1); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+.badge-paid { background: rgba(52, 211, 153, 0.1); color: #34d399; }
+.badge-pending { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.2); }
+.badge-rejected { background: rgba(248, 113, 113, 0.1); color: #f87171; }
+
+.text-secondary { color: var(--text-secondary); }

@@ -1,0 +1,157 @@
+:host {
+  --bg-slate: #0f172a;
+  --card-slate: #1e293b;
+  --accent-orange: #ff8c33;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-muted: #334155;
+
+  display: block;
+  background-color: var(--bg-slate);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.navbar {
+  padding: 0 1.5rem;
+  height: 64px;
+  background: var(--bg-slate);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-muted);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo-text { font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px; }
+.orange-text { color: var(--accent-orange); }
+
+/* PROFILE TRIGGER - No Arrow */
+.profile-trigger {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.profile-trigger:hover {
+  color: var(--accent-orange);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.profile-trigger mat-icon {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+/* MENU CONTAINER FIXES */
+::ng-deep .dark-theme-menu.mat-mdc-menu-panel {
+  background-color: var(--card-slate) !important;
+  border: 1px solid var(--border-muted) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+  min-width: 200px !important;
+  margin-top: 8px;
+}
+
+/* User Info Section */
+.user-info-header {
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--border-muted);
+  margin: 4px 0;
+}
+
+/* MENU ITEMS */
+::ng-deep .dark-theme-menu .mat-mdc-menu-item {
+  color: var(--text-primary) !important;
+  min-height: 44px !important;
+}
+
+::ng-deep .dark-theme-menu .mat-mdc-menu-item mat-icon {
+  color: var(--text-secondary) !important;
+  margin-right: 8px !important;
+}
+
+::ng-deep .dark-theme-menu .mat-mdc-menu-item:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Logout Highlight */
+::ng-deep .dark-theme-menu .logout-item {
+  color: #fb7185 !important; /* Soft Red */
+}
+
+::ng-deep .dark-theme-menu .logout-item mat-icon {
+  color: #fb7185 !important;
+}
+
+/* Use ::ng-deep to reach the overlay container */
+::ng-deep .dark-theme-menu.mat-mdc-menu-panel {
+  background-color: #1e293b !important; /* Force the slate blue background */
+  border: 1px solid #334155 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  min-width: 220px !important;
+  overflow: hidden !important;
+}
+
+/* Ensure the items inside the menu are visible */
+::ng-deep .dark-theme-menu .mat-mdc-menu-item {
+  background: transparent !important;
+  color: #f1f5f9 !important; /* Off-white text */
+}
+
+/* Ensure icons inside the menu are visible */
+::ng-deep .dark-theme-menu .mat-mdc-menu-item mat-icon {
+  color: #94a3b8 !important; /* Muted slate icons */
+}
+
+/* Hover state for items */
+::ng-deep .dark-theme-menu .mat-mdc-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Force User Info visibility */
+.user-info-header {
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid #334155;
+  display: block !important; /* Ensure it isn't hidden */
+}
+
+.user-name {
+  color: #f1f5f9 !important;
+  font-weight: 600;
+  display: block;
+}
+
+.user-email {
+  color: #94a3b8 !important;
+  font-size: 0.75rem;
+  display: block;
+}

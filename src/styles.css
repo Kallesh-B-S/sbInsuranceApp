@@ -1,0 +1,202 @@
+.detail-container {
+  padding: 1rem;
+  width: 95%;
+  max-width: 1400px; /* Increased from 1000px for larger screens */
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .detail-container { padding: 2rem; width: 90%; }
+}
+
+.back-nav { margin-bottom: 1.5rem; }
+
+.detail-main {
+  background: var(--card-black);
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: clamp(1rem, 5vw, 2.5rem); /* Responsive padding */
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Changed from flex-start to keep buttons aligned */
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 2rem;
+}
+
+/* Fix for overlapping text on mobile */
+.detail-header h1 { 
+  /* Responsive font size: min 1.5rem, max 3rem */
+  font-size: clamp(1.5rem, 8vw, 3rem); 
+  margin: 0.2rem 0; 
+  font-weight: 800;
+  line-height: 1.1;
+  word-break: break-word; /* Prevents long IDs from breaking layout */
+}
+
+.financial-strip {
+  background: #151515;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: grid;
+  /* Stacks on mobile, 3 columns on desktop */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #222;
+}
+
+.info-grid {
+  display: grid;
+  /* Adjusted minmax to prevent squeezing on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.info-item .value, .strip-item .value {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  white-space: nowrap; /* Keeps currency on one line */
+}
+
+/* Button responsive fix */
+.detail-header button {
+  width: 100%; /* Full width on tiny mobile */
+}
+
+@media (min-width: 500px) {
+  .detail-header button { width: auto; }
+}
+
+.detail-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.detail-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 2rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: var(--accent-orange);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.5rem;
+}
+
+.info-grid-internal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.previous-ins-box {
+  grid-column: span 2; /* Takes full width of the internal grid */
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.value-small {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-white);
+}
+
+.text-gray { color: var(--text-gray); }
+
+@media (max-width: 600px) {
+  .info-grid-internal { grid-template-columns: 1fr; }
+  .previous-ins-box { grid-column: span 1; }
+  .detail-header-card h1 { font-size: 1.5rem; }
+}
+
+
+
+
+
+/* --- THEMED BACK BUTTON --- */
+.back-nav { 
+  margin-bottom: 2rem; 
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 107, 0, 0.1);
+  color: var(--accent-orange);
+  padding: 10px 18px;
+  border-radius: 100px; /* Pill shape */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  background: var(--accent-orange);
+  color: white;
+  transform: translateX(-5px);
+}
+
+/* --- ALIGNED INFO BOXES --- */
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.info-box:hover {
+  border-left-color: var(--accent-orange);
+}
+
+.label {
+  font-size: 0.7rem !important;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px !important;
+  opacity: 0.6;
+}
+
+.value {
+  font-family: 'Space Grotesk', sans-serif; /* Optional: high-tech font */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* --- RESPONSIVE GRID FOR VEHICLE DETAILS --- */
+.info-grid-internal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  align-items: stretch; /* Ensures all boxes in a row have same height */
+}
+
+@media (max-width: 480px) {
+  .info-grid-internal { grid-template-columns: 1fr; }
+}

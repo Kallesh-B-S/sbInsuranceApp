@@ -1,0 +1,72 @@
+<div class="detail-container">
+  <nav class="back-nav">
+    <a routerLink="/" class="back-link">
+      <mat-icon>keyboard_backspace</mat-icon>
+      RETURN TO DASHBOARD
+    </a>
+  </nav>
+
+  <div class="glass-card detail-header-card">
+    <div class="header-content">
+      <h1 class="orange-text">{{ id() }}</h1>
+      <p class="subtitle">Vehicle Collision Damage</p>
+    </div>
+    
+    <div class="header-actions">
+      <div class="status-indicator">
+        <span class="dot pulse-amber"></span> 
+        <span class="badge badge-pending">UNDER REVIEW</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-grid-layout">
+    
+    <div class="glass-card highlight-border">
+      <h2 class="section-title">
+        <mat-icon>account_balance_wallet</mat-icon> Settlement Summary
+      </h2>
+      
+      <div class="payout-hero">
+        <span class="label">Estimated Payout</span>
+        <div class="main-value">$4,000.00</div>
+      </div>
+
+      <div class="info-grid-internal">
+        <div class="info-box">
+          <span class="label">Requested</span>
+          <div class="value-small">$4,500.00</div>
+        </div>
+        <div class="info-box">
+          <span class="label">Deductible</span>
+          <div class="value-small text-red">-$500.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h2 class="section-title">
+        <mat-icon>event_note</mat-icon> Incident Report
+      </h2>
+      <div class="info-grid-internal">
+        <div class="info-box">
+          <span class="label">Date of Incident</span>
+          <div class="value">Oct 12, 2024</div>
+        </div>
+        <div class="info-box">
+          <span class="label">Policy Link</span>
+          <div class="value-orange">POL-TX001</div>
+        </div>
+
+        <div class="previous-ins-box adjuster-card-small">
+          <div class="adjuster-avatar">SJ</div>
+          <div class="adjuster-info">
+            <span class="label">Assigned Adjuster</span>
+            <div class="value-small">Sarah Jenkins</div>
+            <div class="sub-text">Claim Services North</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

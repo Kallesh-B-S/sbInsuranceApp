@@ -1,0 +1,31 @@
+<div class="app-shell">
+  <nav class="navbar">
+    <div class="logo">
+      <mat-icon class="orange-text">security</mat-icon>
+      <span class="logo-text">SHIELD<span class="orange-text">.</span></span>
+    </div>
+
+    <button class="profile-trigger" [matMenuTriggerFor]="profileMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </nav>
+
+  <mat-menu #profileMenu="matMenu" xPosition="before" class="dark-theme-menu">
+    <div class="user-info-header" (click)="$event.stopPropagation()">
+      <span class="user-name">John Doe</span>
+      <span class="user-email">john.doe@shield.com</span>
+    </div>
+    
+    <!-- <button mat-menu-item>
+      <mat-icon>settings</mat-icon>
+      <span>Account Settings</span>
+    </button> -->
+    
+    <button mat-menu-item class="logout-item">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+  <router-outlet></router-outlet>
+</div>

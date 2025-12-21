@@ -1,0 +1,95 @@
+<div class="dashboard-wrapper">
+  <main class="dashboard-grid">
+    <section class="stats-row">
+
+      <div class="kpi-card" [class.active-card]="currentView() === 'policies'" (click)="setView('policies')">
+        <span class="label">Total Policies</span>
+        <div class="value">{{ policies().length }}</div>
+        <div class="trend-link">View Details <mat-icon>arrow_forward</mat-icon></div>
+      </div>
+
+      <div class="kpi-card" [class.active-card]="currentView() === 'claims'" (click)="setView('claims')">
+        <span class="label">Total Claims</span>
+        <div class="value">{{ claims().length }}</div>
+        <div class="trend-link">View Details <mat-icon>arrow_forward</mat-icon></div>
+      </div>
+    </section>
+
+    <section class="glass-card">
+        <!-- <div class="card-header">
+          <h2>{{ currentView() === 'policies' ? 'Active Insurance Policies' : 'All Claims History' }}</h2>
+          @if(currentView() === 'policies') {
+            <button class="btn-orange"><mat-icon>add</mat-icon> Add Policy</button>
+          }
+        </div> -->
+
+      <div class="table-responsive-container">
+        @if (currentView() === 'policies') {
+          
+          <table mat-table [dataSource]="policies()" class="custom-table">
+            <ng-container matColumnDef="policyNumber">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let p">
+                <a [routerLink]="['/policy', p.policyNumber]" class="orange-link fw-bold">
+                  {{p.policyNumber}}
+                </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="policyName">
+              <th mat-header-cell *matHeaderCellDef> Plan </th>
+              <td mat-cell *matCellDef="let p"> {{p.policyName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="automobileID">
+              <th mat-header-cell *matHeaderCellDef> Auto ID </th>
+              <td mat-cell *matCellDef="let p"> <span class="text-secondary">#{{p.automobileID}}</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="premiumAmount">
+              <th mat-header-cell *matHeaderCellDef> Premium </th>
+              <td mat-cell *matCellDef="let p"> {{p.premiumAmount | currency}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let p">
+                <span class="badge badge-active">{{p.status}}</span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="policyColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: policyColumns;"></tr>
+          </table>
+        } @else {
+          <table mat-table [dataSource]="claims()" class="custom-table">
+            <ng-container matColumnDef="claimId">
+              <th mat-header-cell *matHeaderCellDef> Claim ID </th>
+              <td mat-cell *matCellDef="let c">
+                <a [routerLink]="['/claim', c.claimId]" class="orange-link fw-bold">
+                  {{c.claimId}}
+                </a>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="policyNumber">
+              <th mat-header-cell *matHeaderCellDef> Policy </th>
+              <td mat-cell *matCellDef="let c"> {{c.policyNumber}} </td>
+            </ng-container>
+            <ng-container matColumnDef="claimAmount">
+              <th mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let c"> {{c.claimAmount | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="claimStatus">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let c">
+                <span class="badge" [ngClass]="'badge-' + c.claimStatus.toLowerCase()">{{c.claimStatus}}</span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="claimTableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: claimTableColumns;"></tr>
+          </table>
+        }
+      </div>
+    </section>
+  </main>
+</div>
