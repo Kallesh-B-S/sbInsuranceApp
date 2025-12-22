@@ -35,9 +35,15 @@ export class Dashboard {
   policies = this.policyList.currentPolicies;
 
   ngOnInit() {
-    this.policyList.fetchAllPolicies(this.user?.id).subscribe();
-    console.log(this.policyList.currentPolicies());
+  const user = this.userService.currentUser();
+
+  if (!user) {
+    return;
   }
+
+  this.policyList.fetchAllPolicies(user.id).subscribe();
+}
+
 
   protected readonly title = signal('SHIELD');
 
