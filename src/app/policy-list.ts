@@ -25,9 +25,9 @@ export class PolicyList { // Renamed for clarity (Service vs List)
   // Initialize as an empty array [] instead of null for easier UI loops
   currentPolicies = signal<Policy[]>([]);
 
-  fetchAllPolicies() {
+  fetchAllPolicies(userId: number) {
     // Note: The generic type here is now Policy[]
-    return this.http.get<Policy[]>(`${environment.policyApiUrl}/policy`).pipe(
+    return this.http.get<Policy[]>(`${environment.policyApiUrl}/policy/customer/${userId}`).pipe(
       tap(policies => {
         console.log('Policies successfully fetched:', policies);
         this.currentPolicies.set(policies);
