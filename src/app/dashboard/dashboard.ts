@@ -112,7 +112,7 @@ export class Dashboard {
           next: (res) => {
             alert('Claim submitted successfully!');
             // Optional: refresh your policy list if the status changed
-            this.policyList.fetchAllPolicies().subscribe();
+            // this.policyList.fetchAllPolicies().subscribe();
           },
           error: (err) => {
             console.error('Error submitting claim:', err);
