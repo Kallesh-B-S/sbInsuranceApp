@@ -22,8 +22,8 @@ export const appConfig: ApplicationConfig = {
     provideKeycloak({
       config: {
         url: environment.keycloakUrl,
-        realm: 'insurance',
-        clientId: 'insurance-web-app-client'
+        realm: environment.keycloakRealm,
+        clientId: environment.keycloakClientId
       },
       initOptions: {
         onLoad: 'check-sso',
