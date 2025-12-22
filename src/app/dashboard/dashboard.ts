@@ -35,7 +35,7 @@ export class Dashboard {
   policies = this.policyList.currentPolicies;
 
   ngOnInit() {
-    this.policyList.fetchAllPolicies().subscribe();
+    this.policyList.fetchAllPolicies(this.user?.id).subscribe();
     console.log(this.policyList.currentPolicies());
   }
 
