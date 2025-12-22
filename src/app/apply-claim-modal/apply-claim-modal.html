@@ -19,7 +19,7 @@
         <label>Requested Amount</label>
         <div class="input-container">
           <span class="currency-prefix">$</span>
-          <input type="number" [(ngModel)]="claimData.amount" placeholder="0.00">
+          <input type="number" [(ngModel)]="claimData.requestedAmount" placeholder="0.00">
         </div>
       </div>
 
@@ -33,7 +33,7 @@
 
     <footer class="modal-footer">
       <button class="cancel-link" (click)="onCancel()">Cancel</button>
-      <button class="submit-action" (click)="onSubmit()" [disabled]="!claimData.amount || !claimData.description">
+      <button class="submit-action" (click)="onSubmit()" [disabled]="!claimData.requestedAmount || !claimData.description">
         Submit Application
       </button>
     </footer>

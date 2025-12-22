@@ -25,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class ApplyClaimModal {
   // Form Model
   claimData = {
-    amount: null,
+    requestedAmount: null,
     description: ''
   };
 
@@ -39,10 +39,10 @@ export class ApplyClaimModal {
   }
 
   onSubmit(): void {
-    if (this.claimData.amount && this.claimData.description) {
+    if (this.claimData.requestedAmount && this.claimData.description) {
       // Return data to the parent component
       this.dialogRef.close({
-        policyNumber: this.data.policyNumber,
+        policyId: this.data.policyNumber,
         ...this.claimData
       });
     }

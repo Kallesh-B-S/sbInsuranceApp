@@ -15,8 +15,8 @@
 
   <mat-menu #profileMenu="matMenu" xPosition="before" class="dark-theme-menu">
     <div class="user-info-header" (click)="$event.stopPropagation()">
-      <span class="user-name">John Doe</span>
-      <span class="user-email">john.doe@shield.com</span>
+      <span class="user-name">{{ user()?.fullName || 'Loading...' }}</span>
+      <span class="user-email">{{ user()?.email || userData().email }}</span>
     </div>
 
     <!-- <button mat-menu-item>

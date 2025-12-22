@@ -5,7 +5,8 @@ import {
   includeBearerTokenInterceptor,
   withAutoRefreshToken,
   AutoRefreshTokenService, // <--- Add this
-  UserActivityService      // <--- Add this
+  UserActivityService,      // <--- Add this
+  INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG
 } from 'keycloak-angular';
 
 import { routes } from './app.routes';
@@ -17,8 +18,27 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withHashLocation()),
     provideHttpClient(
-      withInterceptors([includeBearerTokenInterceptor])
+      withInterceptors([
+        includeBearerTokenInterceptor
+      ])
     ),
+    {
+      provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
+      useValue: [
+        {
+          urlPattern: new RegExp(`^(${environment.customerApiUrl})(\/.*)?$`, 'i'),
+          httpMethods: ['GET', 'POST', 'PUT', 'DELETE']
+        },
+        {
+          urlPattern: new RegExp(`^(${environment.policyApiUrl})(\/.*)?$`, 'i'),
+          httpMethods: ['GET', 'POST', 'PUT', 'DELETE']
+        },
+        {
+          urlPattern: new RegExp(`^(${environment.claimApiUrl})(\/.*)?$`, 'i'),
+          httpMethods: ['GET', 'POST', 'PUT', 'DELETE']
+        }
+      ]
+    },
     provideKeycloak({
       config: {
         url: environment.keycloakUrl,

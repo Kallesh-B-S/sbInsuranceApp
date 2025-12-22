@@ -6,6 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { KEYCLOAK_EVENT_SIGNAL } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
+import { UserService } from './customer-profile';
 
 
 @Component({
@@ -17,7 +18,11 @@ import Keycloak from 'keycloak-js';
 })
 export class App {
 
+  private userService = inject(UserService);
+
   private router = inject(Router);
+
+  user = this.userService.currentUser;
 
   goToHome(){
     this.router.navigate(['/home']);
