@@ -1,13 +1,16 @@
 <div class="app-shell">
   <nav class="navbar">
-    <div class="logo">
+    <div class="logo" (click)="goToHome()">
       <mat-icon class="orange-text">security</mat-icon>
       <span class="logo-text">SHIELD<span class="orange-text">.</span></span>
     </div>
 
+    @if (authenticated()) {
     <button class="profile-trigger" [matMenuTriggerFor]="profileMenu">
       <mat-icon>account_circle</mat-icon>
     </button>
+    }
+
   </nav>
 
   <mat-menu #profileMenu="matMenu" xPosition="before" class="dark-theme-menu">
@@ -15,13 +18,13 @@
       <span class="user-name">John Doe</span>
       <span class="user-email">john.doe@shield.com</span>
     </div>
-    
+
     <!-- <button mat-menu-item>
       <mat-icon>settings</mat-icon>
       <span>Account Settings</span>
     </button> -->
-    
-    <button mat-menu-item class="logout-item">
+
+    <button mat-menu-item class="logout-item" (click)="logout()">
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>

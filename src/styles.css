@@ -200,3 +200,19 @@
 @media (max-width: 480px) {
   .info-grid-internal { grid-template-columns: 1fr; }
 }
+
+
+/* Add this to your GLOBAL styles.css file */
+
+/* 1. Remove the white box behind the modal */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 20px !important;
+}
+
+/* 2. Dim the rest of the screen and blur it for focus */
+/* .cdk-overlay-dark-backdrop {
+  background: rgba(2, 6, 23, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+} */

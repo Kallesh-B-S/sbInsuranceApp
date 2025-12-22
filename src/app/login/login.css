@@ -1,0 +1,25 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Adjust based on your layout */
+  background-color: #fafafa;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+mat-card-title {
+  font-weight: bold;
+  color: #1976d2; /* Insurance blue */
+}
+
+mat-card-content p {
+  margin: 20px 0;
+  color: #666;
+  line-height: 1.5;
+}

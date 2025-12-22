@@ -1,6 +1,6 @@
 <div class="detail-container">
   <nav class="back-nav">
-    <a routerLink="/" class="back-link">
+    <a routerLink="/claims" class="back-link">
       <mat-icon>arrow_back</mat-icon> 
       Back to Dashboard
     </a>
@@ -14,12 +14,11 @@
     </div>
     <button class="btn-orange" (click)="downloadDocs()">
       <mat-icon>download</mat-icon>
-      Download Docs
+      <span>Download Docs</span>
     </button>
   </div>
 
   <div class="detail-grid-layout">
-    
     <div class="glass-card">
       <h2 class="section-title"><mat-icon>description</mat-icon> Coverage Details</h2>
       <div class="info-grid-internal">
@@ -56,10 +55,10 @@
         <div class="previous-ins-box">
           <span class="label">Previous Provider Record</span>
           @if(data().automobile.previousInsurance) {
-            <div class="value-small">
+            <div class="value-small highlight-text">
               <strong>{{ data().automobile.previousInsurance.company }}</strong> 
               <span class="text-secondary">
-                (Claim: {{ data().automobile.previousInsurance.lastClaimAmount | currency }})
+                ({{ data().automobile.previousInsurance.lastClaimAmount | currency }})
               </span>
             </div>
           } @else {
@@ -68,6 +67,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

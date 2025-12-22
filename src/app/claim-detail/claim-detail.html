@@ -1,35 +1,43 @@
 <div class="detail-container">
-  <nav class="back-nav">
+  <!-- <nav class="back-nav">
     <a routerLink="/" class="back-link">
       <mat-icon>keyboard_backspace</mat-icon>
       RETURN TO DASHBOARD
     </a>
-  </nav>
+  </nav> -->
+  <div class="title-section">
+    <button class="back-btn" [routerLink]="['/claims']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <!-- <h1 class="page-title">Claims</h1> -->
+  </div>
 
   <div class="glass-card detail-header-card">
     <div class="header-content">
       <h1 class="orange-text">{{ id() }}</h1>
       <p class="subtitle">Vehicle Collision Damage</p>
     </div>
-    
+
     <div class="header-actions">
       <div class="status-indicator">
-        <span class="dot pulse-amber"></span> 
+        <span class="dot pulse-amber"></span>
         <span class="badge badge-pending">UNDER REVIEW</span>
       </div>
     </div>
   </div>
 
   <div class="detail-grid-layout">
-    
+
     <div class="glass-card highlight-border">
       <h2 class="section-title">
         <mat-icon>account_balance_wallet</mat-icon> Settlement Summary
       </h2>
-      
+
       <div class="payout-hero">
         <span class="label">Estimated Payout</span>
+        <div>&nbsp;</div>
         <div class="main-value">$4,000.00</div>
+        <div>&nbsp;</div>
       </div>
 
       <div class="info-grid-internal">

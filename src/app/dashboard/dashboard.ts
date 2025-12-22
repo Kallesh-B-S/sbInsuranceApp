@@ -1,34 +1,30 @@
-import { Component, signal, computed } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, signal, computed, inject } from '@angular/core'; // Added inject
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Added Dialog imports
+import { ApplyClaimModal } from '../apply-claim-modal/apply-claim-modal';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ CommonModule, MatTableModule, MatIconModule, RouterModule],
+  imports: [
+    CommonModule, 
+    MatTableModule, 
+    MatIconModule, 
+    RouterModule, 
+    MatDialogModule // Add this to imports
+  ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
 export class Dashboard {
+  private dialog = inject(MatDialog); // Modern way to inject service in Standalone
+  
   protected readonly title = signal('SHIELD');
 
-  // Track which view is active: 'policies' or 'claims'
-  currentView = signal<'policies' | 'claims' | 'activePolicies'>('policies');
-
-  // policyColumns: string[] = ['policyNumber', 'policyName', 'premiumAmount', 'status'];
-  // Updated columns in dashboard.ts
-  policyColumns: string[] = ['policyNumber', 'policyName', 'automobileID', 'premiumAmount', 'status'];
-  // Added column for the claims table view
-  claimTableColumns: string[] = ['claimId', 'policyNumber', 'claimAmount', 'claimStatus'];
-
-  // policies = signal([
-  //   { "policyNumber": "POL-TX001", "policyName": "Comprehensive Elite", "automobileID": 1, "premiumAmount": 1200.00, "status": "ACTIVE" },
-  //   { "policyNumber": "POL-TS004", "policyName": "EV Battery Pro", "automobileID": 4, "premiumAmount": 2200.00, "status": "ACTIVE" },
-  //   { "policyNumber": "POL-UK022", "policyName": "Luxury Estate Plus", "automobileID": 22, "premiumAmount": 1200.00, "status": "ACTIVE" },
-  //   { "policyNumber": "POL-CN025", "policyName": "Smart Plan", "automobileID": 25, "premiumAmount": 5500.00, "status": "ACTIVE" }
-  // ]);
+  policyColumns: string[] = ['policyNumber', 'policyName', 'automobileID', 'premiumAmount', 'status', "actions"];
 
   policies = signal([
     {
@@ -47,14 +43,40 @@ export class Dashboard {
     }
   ]);
 
-  claims = signal([
-    { "claimId": "CLM-9901", "policyNumber": "POL-TX001", "claimAmount": 4500.00, "claimStatus": "PAID" },
-    { "claimId": "CLM-8822", "policyNumber": "POL-TS004", "claimAmount": 1200.00, "claimStatus": "PENDING" },
-    { "claimId": "CLM-1022", "policyNumber": "POL-UK022", "claimAmount": 850.00, "claimStatus": "PAID" }
-  ]);
+  planFilter = signal('');
+  statusFilter = signal('');
 
-  // Method to change the view
-  setView(view: 'policies' | 'claims' | 'activePolicies') {
-    this.currentView.set(view);
+  filteredPolicies = computed(() => {
+    const plan = this.planFilter().toLowerCase();
+    const status = this.statusFilter();
+
+    return this.policies().filter(p => {
+      const matchesPlan = p.policyName.toLowerCase().includes(plan);
+      const matchesStatus = status === '' || p.status.toLowerCase() === status.toLowerCase();
+      return matchesPlan && matchesStatus;
+    });
+  });
+
+  applyFilter(event: Event, type: 'plan' | 'status') {
+    const value = (event.target as HTMLInputElement | HTMLSelectElement).value;
+    if (type === 'plan') this.planFilter.set(value);
+    if (type === 'status') this.statusFilter.set(value);
+  }
+
+  // --- NEW METHOD TO OPEN MODAL ---
+  openApplyClaimModal(policy: any) {
+    const dialogRef = this.dialog.open(ApplyClaimModal, {
+      width: '500px',
+      maxWidth: '95vw',
+      data: { policyNumber: policy.policyNumber },
+      panelClass: 'shield-dialog-overlay' 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Claim Submission Received:', result);
+        // Here you would typically call a service to save the claim
+      }
+    });
   }
 }

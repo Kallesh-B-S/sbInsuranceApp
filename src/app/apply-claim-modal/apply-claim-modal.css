@@ -1,0 +1,231 @@
+/* --- CONTAINER --- */
+.pro-modal-dark {
+  background: #0f172a; 
+  color: #ffffff;
+  border-radius: 20px;
+  position: relative;
+  /* RESPONSIVE WIDTH: 95% of screen on mobile, max 460px on desktop */
+  width: 90vw;
+  max-width: 460px;
+  margin: 0 auto;
+  border: 1px solid #334155;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.modal-content-wrapper {
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+/* --- HEADER ALIGNMENT --- */
+.modal-header {
+  display: flex;
+  align-items: center; 
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-right: 20px; /* Space for close button */
+}
+
+.icon-container {
+  width: 52px;
+  height: 52px;
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #818cf8;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.title-group h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #ff8c33;
+  line-height: 1.2;
+}
+
+.title-group p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.policy-id {
+  color: #818cf8;
+  font-weight: 600;
+}
+
+/* --- FORM BODY --- */
+.form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-wrapper label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: 16px;
+  color: #818cf8;
+  font-weight: 700;
+  z-index: 2;
+}
+
+/* --- INPUTS & TEXTAREA --- */
+input, textarea {
+  width: 100%;
+  background: #020617; 
+  border: 1.5px solid #334155;
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Hide Spin Buttons */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  padding-left: 35px; /* Room for $ */
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+/* --- FOOTER & BUTTONS --- */
+.modal-footer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.submit-action {
+  background: #6366f1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.submit-action:hover:not(:disabled) {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.submit-action:disabled {
+  background: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.cancel-link {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* --- MOBILE RESPONSIVE QUERIES --- */
+@media screen and (max-width: 480px) {
+  .modal-content-wrapper {
+    padding: 24px 20px; /* Reduce padding on small screens */
+  }
+
+  .modal-header {
+    margin-bottom: 24px;
+  }
+
+  .icon-container {
+    width: 44px;
+    height: 44px;
+  }
+
+  .title-group h1 {
+    font-size: 1.2rem;
+  }
+
+  /* Prevent iOS zoom on focus */
+  input, textarea {
+    font-size: 16px; 
+  }
+
+  .modal-footer {
+    flex-direction: row; /* Keep them side by side unless buttons are long */
+    margin-top: 24px;
+  }
+  
+  .submit-action {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* For very small screens, stack the buttons */
+@media screen and (max-width: 360px) {
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+  
+  .submit-action, .cancel-link {
+    width: 100%;
+    text-align: center;
+  }
+}
