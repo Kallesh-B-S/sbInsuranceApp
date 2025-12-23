@@ -19,10 +19,10 @@
       <h1>{{ data().policy.policyName }}</h1>
       <p class="subtitle">Policy ID: <span class="mono">{{ data().policy.policyNumber }}</span></p>
     </div>
-    <button class="btn-orange" (click)="downloadDocs()">
+    <!-- <button class="btn-orange" (click)="downloadDocs()">
       <mat-icon>download</mat-icon>
       <span>Download Docs</span>
-    </button>
+    </button> -->
   </div>
 
   <div class="detail-grid-layout">
@@ -49,23 +49,23 @@
 
     <div class="glass-card">
       <h2 class="section-title"><mat-icon>directions_car</mat-icon> Vehicle Information</h2>
-      <div class="info-grid-internal">
-        <div class="info-box">
-          <span class="label">Make / Model</span>
-          <div class="value">{{ data().automobile.year }} {{ data().automobile.make }}</div>
+      <div class="info-grid-internal-a">
+        <div class="info-box-a">
+          <span class="label">Make / Model / Year</span>
+          <div class="value">{{ data().automobile.make }} / {{ data().automobile.made }} / {{data().automobile.year}}</div>
         </div>
-        <div class="info-box">
+        <!-- <div class="info-box">
           <span class="label">Automobile ID</span>
           <div class="value">#{{ data().automobile.id }}</div>
-        </div>
+        </div> -->
         
         <div class="previous-ins-box">
           <span class="label">Previous Provider Record</span>
           @if(data().automobile.previousInsurance) {
             <div class="value-small highlight-text">
-              <strong>{{ data().automobile.previousInsurance.company }}</strong> 
+              <strong>{{ data().automobile.previousInsurance?.company }}</strong> 
               <span class="text-secondary">
-                ({{ data().automobile.previousInsurance.lastClaimAmount | currency }})
+                ({{ data().automobile.previousInsurance?.lastClaimAmount | currency }})
               </span>
             </div>
           } @else {

@@ -8,11 +8,12 @@
 
   display: block;
   background-color: var(--bg-slate);
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   padding: 1rem;
-  overflow-x: hidden; /* Hard prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Hard prevent horizontal scroll */
 }
 
 /* Global Reset to prevent width calculation errors */
@@ -35,10 +36,11 @@
   border-radius: 16px;
   padding: 1.25rem;
   margin-bottom: 1.25rem;
-  width: 100%; 
-  max-width: 100%; 
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
-  overflow: hidden; /* Contain children */
+  overflow: hidden;
+  /* Contain children */
 }
 
 /* HEADER CARD */
@@ -50,7 +52,9 @@
 }
 
 /* Text Wrapping Logic */
-h1, .value, .value-small {
+h1,
+.value,
+.value-small {
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -59,11 +63,12 @@ h1, .value, .value-small {
 
 .mono {
   font-family: 'Courier New', monospace;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.85em;
-  word-break: break-all; /* Breaks long IDs/Serial numbers anywhere */
+  word-break: break-all;
+  /* Breaks long IDs/Serial numbers anywhere */
 }
 
 /* THE GRID FIX: min-width: 0 is critical here */
@@ -82,11 +87,15 @@ h1, .value, .value-small {
 }
 
 /* Ensure individual boxes don't push the width */
-.info-box {
-  width: 100%;
-  min-width: 0; /* Forces flex children to shrink below content size */
+.info-box-a {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s;
 }
 
 .previous-ins-box {
@@ -97,7 +106,7 @@ h1, .value, .value-small {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  min-width: 0; 
+  min-width: 0;
 }
 
 /* BUTTONS */
@@ -112,13 +121,15 @@ h1, .value, .value-small {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 100%; 
+  width: 100%;
   cursor: pointer;
 }
 
 /* DESKTOP RE-ORDERING */
 @media (min-width: 768px) {
-  :host { padding: 2rem; }
+  :host {
+    padding: 2rem;
+  }
 
   .detail-header-card {
     flex-direction: row;
@@ -126,7 +137,10 @@ h1, .value, .value-small {
     align-items: center;
   }
 
-  .btn-orange { width: auto; padding: 0.8rem 1.5rem; }
+  .btn-orange {
+    width: auto;
+    padding: 0.8rem 1.5rem;
+  }
 
   /* Switch back to Grid for side-by-side view */
   .detail-grid-layout {
@@ -139,7 +153,18 @@ h1, .value, .value-small {
     grid-template-columns: 1fr 1fr;
   }
 
-  .info-box.wide, .previous-ins-box {
+  .info-grid-internal-a {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+  }
+
+  .info-box-a:hover {
+    border-left-color: var(--accent-orange);
+  }
+
+  .info-box.wide,
+  .previous-ins-box {
     grid-column: span 2;
   }
 }
@@ -166,6 +191,12 @@ h1, .value, .value-small {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.back-btn:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  background: rgba(255, 140, 51, 0.05);
 }
 
 .page-title {
