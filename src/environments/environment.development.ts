@@ -3,7 +3,7 @@ export const environment = {
   production: false,
   keycloakRealm:"insurance",
   keycloakClientId:"insurance-web-app-client",
-  customerApiUrl: "http://localhost:8766/customer",
-  policyApiUrl: "http://localhost:8096/policy",
+  customerApiUrl: "http://localhost:8766",
+  policyApiUrl: "http://localhost:8096",
   claimApiUrl: "http://localhost:8097"
 };
