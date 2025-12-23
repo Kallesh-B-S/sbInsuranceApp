@@ -1,28 +1,17 @@
+@if (data(); as d) {
 <div class="detail-container">
-  <!-- <nav class="back-nav">
-    <a routerLink="/claims" class="back-link">
-      <mat-icon>arrow_back</mat-icon> 
-      Back to Dashboard
-    </a>
-  </nav> -->
-
   <div class="title-section">
     <button class="back-btn" [routerLink]="['/home']">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <!-- <h1 class="page-title">Claims</h1> -->
   </div>
 
   <div class="glass-card detail-header-card">
     <div class="header-content">
-      <span class="badge badge-active">{{ data().policy.status }}</span>
-      <h1>{{ data().policy.policyName }}</h1>
-      <p class="subtitle">Policy ID: <span class="mono">{{ data().policy.policyNumber }}</span></p>
+      <span class="badge badge-active">{{ d.policy.status }}</span>
+      <h1>{{ d.policy.policyName }}</h1>
+      <p class="subtitle">Policy ID: <span class="mono">{{ d.policy.policyNumber }}</span></p>
     </div>
-    <!-- <button class="btn-orange" (click)="downloadDocs()">
-      <mat-icon>download</mat-icon>
-      <span>Download Docs</span>
-    </button> -->
   </div>
 
   <div class="detail-grid-layout">
@@ -31,17 +20,17 @@
       <div class="info-grid-internal">
         <div class="info-box">
           <span class="label">Premium Amount</span>
-          <div class="value">{{ data().policy.premiumAmount | currency }}</div>
+          <div class="value">{{ d.policy.premiumAmount | currency }}</div>
         </div>
         <div class="info-box">
           <span class="label">Coverage Limit</span>
-          <div class="value">{{ data().policy.coverageAmount | currency }}</div>
+          <div class="value">{{ d.policy.coverageAmount | currency }}</div>
         </div>
         <div class="info-box wide">
           <span class="label">Duration</span>
           <div class="value-small">
             <mat-icon>calendar_today</mat-icon>
-            {{ data().policy.startDate }} — {{ data().policy.endDate }}
+            {{ d.policy.startDate }} — {{ d.policy.endDate }}
           </div>
         </div>
       </div>
@@ -52,20 +41,16 @@
       <div class="info-grid-internal-a">
         <div class="info-box-a">
           <span class="label">Make / Model / Year</span>
-          <div class="value">{{ data().automobile.make }} / {{ data().automobile.made }} / {{data().automobile.year}}</div>
+          <div class="value">{{ d.automobile.make }} / {{ d.automobile.made }} / {{ d.automobile.year }}</div>
         </div>
-        <!-- <div class="info-box">
-          <span class="label">Automobile ID</span>
-          <div class="value">#{{ data().automobile.id }}</div>
-        </div> -->
         
         <div class="previous-ins-box">
           <span class="label">Previous Provider Record</span>
-          @if(data().automobile.previousInsurance) {
+          @if(d.automobile.previousInsurance) {
             <div class="value-small highlight-text">
-              <strong>{{ data().automobile.previousInsurance?.company }}</strong> 
+              <strong>{{ d.automobile.previousInsurance.company }}</strong> 
               <span class="text-secondary">
-                ({{ data().automobile.previousInsurance?.lastClaimAmount | currency }})
+                ({{ d.automobile.previousInsurance.lastClaimAmount | currency }})
               </span>
             </div>
           } @else {
@@ -76,3 +61,8 @@
     </div>
   </div>
 </div>
+} @else {
+  <div class="loading-state">
+    <p>Loading policy data...</p>
+  </div>
+}

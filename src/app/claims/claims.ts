@@ -27,7 +27,7 @@ export class Claims {
     'incidentDate',
     'claimStatus',
     'remarks'
-    // 'actions'
+    // ,'actions'
   ];
   statusFilter = signal('');
 
