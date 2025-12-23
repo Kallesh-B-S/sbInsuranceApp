@@ -345,3 +345,62 @@ th.mat-column-actions {
         padding: 0 8px !important;
     }
 }
+
+.no-data-row td {
+  text-align: center;
+  padding: 3rem 1rem !important;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.no-data-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.no-data-content mat-icon {
+  opacity: 0.5;
+}
+
+
+.dashboard-grid {
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    
+    /* Force the grid to be exactly the height of the viewport minus padding */
+    max-height: 90vh; 
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* SETTLED - Green (Success) */
+.badge-settled {
+    background: rgba(52, 211, 153, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+/* SUBMITTED - Blue (Information) */
+.badge-submitted {
+    background: rgba(96, 165, 250, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* UNDER_REVIEW - Yellow (Warning/Action Required) */
+.badge-under_review {
+    background: rgba(255, 184, 0, 0.1);
+    color: #ffb800;
+    border: 1px solid rgba(255, 184, 0, 0.2);
+}
+
+/* REJECTED - Red (Alert) */
+.badge-rejected {
+    background: rgba(248, 113, 113, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.2);
+}
