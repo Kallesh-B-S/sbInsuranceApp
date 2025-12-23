@@ -70,13 +70,15 @@
                   <mat-icon>visibility</mat-icon>
                   <span>View Claims</span>
                 </button>
-                <button mat-button class="apply-claim-btn" (click)="openApplyClaimModal(p)">
-                  <mat-icon>post_add</mat-icon>
-                  <span>Apply Claim</span>
-                </button>
-                <button mat-button class="view-claims-btn" [routerLink]="['/policy/', p.policyNumber]">
+
+                <!-- <button mat-button class="view-claims-btn" [routerLink]="['/policy/', p.policyNumber]">
                   <mat-icon>visibility</mat-icon>
                   <span>View Details</span>
+                </button> -->
+
+                <button mat-button class="view-claims-btn" (click)="openApplyClaimModal(p)">
+                  <mat-icon>post_add</mat-icon>
+                  <span>Submit Claim</span>
                 </button>
               </div>
             </td>

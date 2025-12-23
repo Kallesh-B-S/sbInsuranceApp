@@ -1,7 +1,10 @@
 import { Injectable, signal, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { KEYCLOAK_EVENT_SIGNAL } from 'keycloak-angular';
+import Keycloak from 'keycloak-js';
 
 export interface CustomerProfile {
   id: number;
@@ -13,25 +16,48 @@ export interface CustomerProfile {
   country: string;
   zipCode: string;
   phone: string;
-  // add other fields
 }
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private http = inject(HttpClient);
+  private router = inject(Router);
+  private keycloak = inject(Keycloak);
+  private keycloakEvent = inject(KEYCLOAK_EVENT_SIGNAL);
 
-  // The global state
   currentUser = signal<CustomerProfile | null>(null);
 
   fetchAndStoreUser(email: string) {
-    // DON'T: .subscribe() here. It returns a Subscription.
-    // DO: Return the result of .get(), which is an Observable.
-    return this.http.get<CustomerProfile>(`${environment.customerApiUrl}/customer/email/` + email).pipe(
+    return this.http.get<CustomerProfile>(`${environment.customerApiUrl}/customer/email/${email}`).pipe(
       tap(user => {
         console.log('User data successfully fetched:', user);
-        this.currentUser.set(user); // Update your Signal here
+        this.currentUser.set(user);
+      }),
+      catchError((error: HttpErrorResponse) => {
+        // 1. Alert the user
+        // alert(`Session Error: ${error.statusText || 'Could not fetch profile'}`);
+
+        // 2. Perform Logout (Calling the async method without await here is fine 
+        // because Keycloak will trigger a page redirect anyway)
+        alert("Invalid Username/Password")
+        this.logout();
+
+        // 3. Return the error
+        return throwError(() => error);
       })
     );
+  }
+
+  async logout() {
+
+    try {
+      this.clearUser(); // Clear local state first
+      await this.keycloak.logout({
+        redirectUri: window.location.origin + '/login'
+      });
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
   }
 
   clearUser() {

@@ -9,6 +9,7 @@ export interface Claim {
   customerId: number,
   claimNumber: String;
   requestedAmount: number;
+  incidentDate: string;
   description: string;
   status: string;
   remarks: string;

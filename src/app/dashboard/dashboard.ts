@@ -35,14 +35,14 @@ export class Dashboard {
   policies = this.policyList.currentPolicies;
 
   ngOnInit() {
-  const user = this.userService.currentUser();
+    const user = this.userService.currentUser();
 
-  if (!user) {
-    return;
+    if (!user) {
+      return;
+    }
+
+    this.policyList.fetchAllPolicies(user.id).subscribe();
   }
-
-  this.policyList.fetchAllPolicies(user.id).subscribe();
-}
 
 
   protected readonly title = signal('SHIELD');
@@ -107,6 +107,8 @@ export class Dashboard {
     dialogRef.afterClosed().subscribe(result => {
       // 'result' contains the { policyId, amount, description } from your modal
       if (result) {
+        console.log("data from modal : ", result);
+
         result = { ...result, customerId: this.user?.id }
         this.createClaim.submitClaim(result).subscribe({
           next: (res) => {
@@ -116,7 +118,15 @@ export class Dashboard {
           },
           error: (err) => {
             console.error('Error submitting claim:', err);
-            alert('Failed to submit claim. Check CORS or server status.');
+            // console.log(err.status);
+            // console.log(err.error);
+
+            if (err.status === 400) {
+              alert("Bad Request")
+            }
+            else {
+              alert("Failed to Submit Claim")
+            }
           }
         });
       }

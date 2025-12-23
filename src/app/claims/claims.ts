@@ -21,11 +21,14 @@ export class Claims {
   }
 
   claimColumns: string[] = [
-    'claimId', 
+    'claimId',
     // 'policyNumber', 
-    'claimAmount', 
-    'claimStatus', 
-    'actions'];
+    'claimAmount',
+    'incidentDate',
+    'claimStatus',
+    'remarks'
+    // 'actions'
+  ];
   statusFilter = signal('');
 
   private policyClaimList = inject(PolicyClaimList);

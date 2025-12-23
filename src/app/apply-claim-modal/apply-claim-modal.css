@@ -229,3 +229,18 @@ input:focus, textarea:focus {
     text-align: center;
   }
 }
+
+input[type="date"] {
+  width: 100%;
+  /* background: transparent; */
+  border: none;
+  color: white; /* Or your dark theme text color */
+  padding: 8px 0;
+  outline: none;
+}
+
+/* Optional: Style the calendar icon for dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
