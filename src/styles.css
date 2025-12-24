@@ -1,27 +1,35 @@
 .detail-container {
   padding: 1rem;
   width: 95%;
-  max-width: 1400px; /* Increased from 1000px for larger screens */
+  max-width: 1400px;
+  /* Increased from 1000px for larger screens */
   margin: 0 auto;
 }
 
 @media (min-width: 768px) {
-  .detail-container { padding: 2rem; width: 90%; }
+  .detail-container {
+    padding: 2rem;
+    width: 90%;
+  }
 }
 
-.back-nav { margin-bottom: 1.5rem; }
+.back-nav {
+  margin-bottom: 1.5rem;
+}
 
 .detail-main {
   background: var(--card-black);
   border: 1px solid #222;
   border-radius: 20px;
-  padding: clamp(1rem, 5vw, 2.5rem); /* Responsive padding */
+  padding: clamp(1rem, 5vw, 2.5rem);
+  /* Responsive padding */
 }
 
 .detail-header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Changed from flex-start to keep buttons aligned */
+  align-items: center;
+  /* Changed from flex-start to keep buttons aligned */
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2.5rem;
@@ -30,13 +38,14 @@
 }
 
 /* Fix for overlapping text on mobile */
-.detail-header h1 { 
+.detail-header h1 {
   /* Responsive font size: min 1.5rem, max 3rem */
-  font-size: clamp(1.5rem, 8vw, 3rem); 
-  margin: 0.2rem 0; 
+  font-size: clamp(1.5rem, 8vw, 3rem);
+  margin: 0.2rem 0;
   font-weight: 800;
   line-height: 1.1;
-  word-break: break-word; /* Prevents long IDs from breaking layout */
+  word-break: break-word;
+  /* Prevents long IDs from breaking layout */
 }
 
 .financial-strip {
@@ -58,19 +67,24 @@
   gap: clamp(1rem, 3vw, 2.5rem);
 }
 
-.info-item .value, .strip-item .value {
+.info-item .value,
+.strip-item .value {
   font-size: clamp(1rem, 2vw, 1.4rem);
   font-weight: 600;
-  white-space: nowrap; /* Keeps currency on one line */
+  white-space: nowrap;
+  /* Keeps currency on one line */
 }
 
 /* Button responsive fix */
 .detail-header button {
-  width: 100%; /* Full width on tiny mobile */
+  width: 100%;
+  /* Full width on tiny mobile */
 }
 
 @media (min-width: 500px) {
-  .detail-header button { width: auto; }
+  .detail-header button {
+    width: auto;
+  }
 }
 
 .detail-grid-layout {
@@ -108,7 +122,8 @@
 }
 
 .previous-ins-box {
-  grid-column: span 2; /* Takes full width of the internal grid */
+  grid-column: span 2;
+  /* Takes full width of the internal grid */
   background: #1a1a1a;
   padding: 1rem;
   border-radius: 8px;
@@ -121,12 +136,22 @@
   color: var(--text-white);
 }
 
-.text-gray { color: var(--text-gray); }
+.text-gray {
+  color: var(--text-gray);
+}
 
 @media (max-width: 600px) {
-  .info-grid-internal { grid-template-columns: 1fr; }
-  .previous-ins-box { grid-column: span 1; }
-  .detail-header-card h1 { font-size: 1.5rem; }
+  .info-grid-internal {
+    grid-template-columns: 1fr;
+  }
+
+  .previous-ins-box {
+    grid-column: span 1;
+  }
+
+  .detail-header-card h1 {
+    font-size: 1.5rem;
+  }
 }
 
 
@@ -134,8 +159,8 @@
 
 
 /* --- THEMED BACK BUTTON --- */
-.back-nav { 
-  margin-bottom: 2rem; 
+.back-nav {
+  margin-bottom: 2rem;
 }
 
 .back-link {
@@ -145,7 +170,8 @@
   background: rgba(255, 107, 0, 0.1);
   color: var(--accent-orange);
   padding: 10px 18px;
-  border-radius: 100px; /* Pill shape */
+  border-radius: 100px;
+  /* Pill shape */
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
@@ -183,7 +209,8 @@
 }
 
 .value {
-  font-family: 'Space Grotesk', sans-serif; /* Optional: high-tech font */
+  font-family: 'Space Grotesk', sans-serif;
+  /* Optional: high-tech font */
   font-size: 1.25rem;
   font-weight: 700;
   color: #fff;
@@ -194,11 +221,14 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  align-items: stretch; /* Ensures all boxes in a row have same height */
+  align-items: stretch;
+  /* Ensures all boxes in a row have same height */
 }
 
 @media (max-width: 480px) {
-  .info-grid-internal { grid-template-columns: 1fr; }
+  .info-grid-internal {
+    grid-template-columns: 1fr;
+  }
 }
 
 
@@ -216,3 +246,21 @@
   background: rgba(2, 6, 23, 0.85) !important;
   backdrop-filter: blur(8px) !important;
 } */
+
+
+/* scroll bar hide */
+/* Utility class to hide scrollbars while allowing scrolling */
+.custom-hide-scrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, and Opera */
+.custom-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+}

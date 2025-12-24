@@ -15,9 +15,38 @@ export interface ClaimRequest {
 export class CreateClaim {
   private http = inject(HttpClient);
 
-  submitClaim(claim: ClaimRequest) {
-    // Note: ensure this URL matches your backend endpoint
-    return this.http.post(`${environment.claimApiUrl}/claim`, claim).pipe(
+  // submitClaim(claim: ClaimRequest) {
+  //   // Note: ensure this URL matches your backend endpoint
+  //   return this.http.post(`${environment.claimApiUrl}/claim`, claim).pipe(
+  //     tap(response => console.log('Claim submitted successfully:', response))
+  //   );
+  // }
+
+  submitClaim(claim: any) {
+    const formData = new FormData();
+
+    // Create the request body object without the images
+    const requestBody = {
+      policyId: claim.policyId,
+      customerId: claim.customerId,
+      requestedAmount: claim.requestedAmount,
+      description: claim.description,
+      incidentDate: claim.incidentDate
+    };
+
+    // 1. Add the JSON data as a Blob
+    formData.append('requestBody', new Blob([JSON.stringify(requestBody)], {
+      type: 'application/json'
+    }));
+
+    // 2. Add the images
+    if (claim.images && claim.images.length > 0) {
+      claim.images.forEach((file: File) => {
+        formData.append('images', file, file.name);
+      });
+    }
+
+    return this.http.post(`${environment.claimApiUrl}/claim`, formData).pipe(
       tap(response => console.log('Claim submitted successfully:', response))
     );
   }

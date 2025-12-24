@@ -404,3 +404,33 @@ th.mat-column-actions {
     color: #f87171;
     border: 1px solid rgba(248, 113, 113, 0.2);
 }
+
+
+/* table column min-width */
+
+/* Target all headers and cells in specific columns */
+
+.mat-column-claimId {
+    min-width: 150px;
+}
+
+.mat-column-claimAmount {
+    min-width: 200px;
+}
+
+.mat-column-claimStatus {
+    min-width: 150px;
+}
+
+.mat-column-incidentDate {
+    min-width: 140px;
+}
+
+.mat-column-remarks {
+    min-width: 250px; /* Remarks usually need more space */
+}
+
+/* Optional: If you re-enable the actions column */
+.mat-column-actions {
+    min-width: 120px;
+}

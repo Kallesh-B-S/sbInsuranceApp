@@ -1,4 +1,4 @@
-<div class="pro-modal-dark">
+<div class="pro-modal-dark custom-hide-scrollbar">
   <button class="close-btn" (click)="onCancel()" aria-label="Close">
     <mat-icon>close</mat-icon>
   </button>
@@ -36,11 +36,40 @@
           <textarea [(ngModel)]="claimData.description" placeholder="Describe the incident..." rows="4"></textarea>
         </div>
       </div>
+
+      <!-- Images Section -->
+      <div class="field-wrapper">
+        <label>Supporting Images (JPG, PNG)</label>
+        <div class="upload-container">
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png" multiple hidden>
+
+          <div class="upload-placeholder" *ngIf="selectedFiles.length === 0" (click)="fileInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Click to upload images</span>
+          </div>
+
+          <div class="preview-scroll-container" *ngIf="selectedFiles.length > 0">
+            <div class="preview-grid">
+              <div class="preview-item" *ngFor="let file of previewUrls; let i = index">
+                <img [src]="file" alt="Preview">
+                <button class="remove-img" (click)="removeImage(i, $event)">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+
+              <div class="add-more-box" (click)="fileInput.click()">
+                <mat-icon>add</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer class="modal-footer">
       <button class="cancel-link" (click)="onCancel()">Cancel</button>
-      <button class="submit-action" (click)="onSubmit()" [disabled]="!claimData.requestedAmount || !claimData.description || !claimData.incidentDate">
+      <button class="submit-action" (click)="onSubmit()"
+        [disabled]="!claimData.requestedAmount || !claimData.description || !claimData.incidentDate">
         Submit
       </button>
     </footer>
