@@ -9,10 +9,12 @@ export interface Claim {
   customerId: number;
   claimNumber: string;
   requestedAmount: number;
+  approvedAmount: number;
   description: string;
   incidentDate: string;
   status: 'SUBMITTED' | 'APPROVED' | 'REJECTED' | 'PENDING'; // Using a union type for better safety
   remarks: string;
+  images:[];
 }
 
 @Injectable({

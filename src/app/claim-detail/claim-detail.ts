@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ClaimData } from '../claim-data';
+import { environment } from '../../environments/environment';
 
 
 interface GalleryImage {
   url: string;
-  name: string;
 }
 
 @Component({
@@ -26,29 +26,29 @@ export class ClaimDetail {
 
   private claimData = inject(ClaimData);
 
-  // data = this.claimData.activeClaim;
+  data = this.claimData.activeClaim;
 
-  // claimId = signal<string | null>(null);
+  claimId = signal<string | null>(null);
 
-  // ngOnInit() {
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //   this.claimId.set(id);
-  //   this.claimData.getClaimById(this.claimId() ?? "").subscribe();
-  // }
-
-  data() {
-    return {
-      "id": 1,
-      "policyId": 1,
-      "customerId": 1,
-      "claimNumber": "CLM-1",
-      "requestedAmount": 400,
-      "description": "Claim description 3",
-      "incidentDate": "2025-12-22",
-      "status": "SUBMITTED",
-      "remarks": "Claim Submitted"
-    }
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.claimId.set(id);
+    this.claimData.getClaimById(this.claimId() ?? "").subscribe();
   }
+
+  // data() {
+  //   return {
+  //     "id": 1,
+  //     "policyId": 1,
+  //     "customerId": 1,
+  //     "claimNumber": "CLM-1",
+  //     "requestedAmount": 400,
+  //     "description": "Claim description 3",
+  //     "incidentDate": "2025-12-22",
+  //     "status": "SUBMITTED",
+  //     "remarks": "Claim Submitted"
+  //   }
+  // }
 
   // Method to handle UI actions
   contactAdjuster() {
@@ -59,20 +59,22 @@ export class ClaimDetail {
   // gal 
 
   images = signal<GalleryImage[]>([
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p1.jpg", name: "p1" },
-    { url: "/proofImages/claim/clm1/p2.png", name: "p1" }
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p1.jpg" },
+    { url: "/proofImages/claim/clm1/p2.png" }
   ]);
+
+  baseUrl = environment.claimApiUrl+"/"
 
   viewImage(url: string) {
     if (!url) return;
-    window.open(url, '_blank');
+    window.open(this.baseUrl+url, '_blank');
   }
 
   // downloadImage(url: string, fileName: string) {
@@ -84,15 +86,17 @@ export class ClaimDetail {
   //   document.body.removeChild(link);
   // }
 
-  async downloadImage(url: string, fileName: string) {
+  async downloadImage(url: string) {
+    // async downloadImage(url: string, fileName: string) {
     try {
-      const response = await fetch(url);
+      const response = await fetch(this.baseUrl+url);
       const blob = await response.blob();
       const objectUrl = window.URL.createObjectURL(blob);
 
       const link = document.createElement('a');
       link.href = objectUrl;
-      link.download = fileName || 'download';
+      // link.download = fileName || 'download';
+      link.download = 'download';
       link.click();
 
       window.URL.revokeObjectURL(objectUrl);

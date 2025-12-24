@@ -314,3 +314,31 @@
   background: rgba(251, 191, 36, 0.1);
   color: #fbbf24;
 }
+
+
+/* Container for the policy number - usually fixed width for codes */
+.mat-column-policyNumber {
+    min-width: 150px;
+}
+
+/* Policy Name usually needs more space as it is descriptive */
+.mat-column-policyName {
+    min-width: 250px;
+}
+
+/* Currency columns can be slightly narrower */
+.mat-column-premiumAmount {
+    min-width: 150px;
+    text-align: right; /* Often better for financial data */
+}
+
+.mat-column-coverageAmount {
+    min-width: 150px;
+    text-align: right;
+}
+
+/* Status is usually a single word like 'ACTIVE' */
+.mat-column-status {
+    min-width: 120px;
+    text-align: center;
+}

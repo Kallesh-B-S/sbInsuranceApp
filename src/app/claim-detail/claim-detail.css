@@ -149,11 +149,13 @@
   margin: 10px 0;
   border-radius: 12px;
   border-left: 3px solid var(--accent-orange);
+  display: flex;
+  flex-direction: column;
 }
 
 .main-value {
-  font-size: clamp(1.8rem, 6vw, 2.8rem);
-  font-weight: 800;
+  font-size: clamp(1.8rem, 0vw, 2.8rem);
+  font-weight: 600;
   color: var(--text-primary);
 }
 
@@ -183,13 +185,61 @@
 }
 
 
+
+
+/* Force this specific box to span both columns */
+.full-width-info {
+  grid-column: 1 / -1;
+  /* -1 means "stretch to the end of the grid" */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s;
+  border-left: 3px solid var(--text-secondary);
+}
+
+.full-width-info:hover {
+  border-left-color: var(--accent-orange);
+}
+
+/* Ensure long text doesn't overflow the card */
+.full-width-info .value-text {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  color: var(--text-primary);
+}
+
+
+
+
+
 /* gal */
+
+
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1.25rem;
   margin-top: 1rem;
+}
+
+.gallery-grid .empty-state{
+  grid-column: 1 / -1; 
+  
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  color: #666;
+  padding: 2rem; */
 }
 
 .gallery-item {
