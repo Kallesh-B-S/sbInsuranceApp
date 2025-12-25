@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "5ce60c85-c42b-424c-ad9a-8d6aacbdc2d4",
+		"name": "insurance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29397516"
+	},
+	"item": [
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "Customer Register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"{{fullName}}\",\r\n    \"dob\": \"{{dob}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"state\": \"{{state}}\",\r\n    \"country\": \"{{country}}\",\r\n    \"zipCode\": \"{{zipCode}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8766/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Customer Vechile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Get the raw data from your collection runner file\r",
+									"let insuranceData = pm.iterationData.get(\"previousInsurance\");\r",
+									"\r",
+									"// Logic to handle null vs object\r",
+									"if (insuranceData === null || insuranceData === undefined) {\r",
+									"    pm.variables.set(\"dynamicInsurance\", \"null\");\r",
+									"} else {\r",
+									"    // If it's already an object (from JSON file), stringify it\r",
+									"    // If it's a string (from CSV), Postman handles it\r",
+									"    pm.variables.set(\"dynamicInsurance\", JSON.stringify(insuranceData));\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": {{customerId}},\r\n    \"make\": \"{{make}}\",\r\n    \"made\": \"{{made}}\",\r\n    \"year\": \"{{year}}\",\r\n    \"licensePlateNumber\": \"{{licensePlateNumber}}\",\r\n    \"vehicleIdentificationNumber\": \"{{vehicleIdentificationNumber}}\",\r\n    \"previousInsurance\": {{dynamicInsurance}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8766/customer/automobile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8766/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Customer Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"john@example.com\",\r\n    \"password\":\"mypassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8766/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By CustomerID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8766/customer/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer By email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8766/customer/email/john.doe@example.com"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Automobile By AutomobileD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8766/customer/automobile/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer full Details by Customer ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8766/customer/2/automobile"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "policy",
+			"item": [
+				{
+					"name": "Create Policy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"policyName\": \"{{policyName}}\",\r\n  \"automobileID\": {{automobileID}},\r\n  \"customerId\": {{customerId}},\r\n  \"premiumAmount\": {{premiumAmount}},\r\n  \"premiumFrequency\":\"{{premiumFrequency}}\",\r\n  \"coverageAmount\": {{coverageAmount}},\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"renewalDate\":\"{{renewalDate}}\"\r\n}\r\n\r\n// {\r\n//   \"policyName\": \"Life Auto Plan\",\r\n//   \"automobileID\":1,\r\n//   \"customerId\":1,\r\n//   \"premiumAmount\": 5000.00,\r\n//   \"coverageAmount\": 500000.00,\r\n//   \"startDate\": \"2025-12-21\",\r\n//   \"endDate\": \"2026-12-22\"\r\n// }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8096/policy"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Policy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8096/policy"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Policy By ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8096/policy/batch/list?ids=1,2,3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"policy",
+								"batch",
+								"list"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "1,2,3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Policy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"policyName\": \"Life Auto Plan 1\",\r\n  \"status\": \"ACTIVE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8096/policy/update/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Policy By PolicyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8096/policy/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Policy With Automobile By PolicyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8096/policy/1/automobile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Policy By CustomerId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8096/policy/customer/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "claim",
+			"item": [
+				{
+					"name": "Create Claim",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "requestBody",
+									"value": "{\n  \"policyId\": 1,\n  \"customerId\": 1,\n  \"requestedAmount\": 401.00,\n  \"incidentDate\": \"03-12-2025\",\n  \"description\": \"Claim description 4\"\n}\n",
+									"contentType": "application/json\n",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": "http://localhost:8097/claim"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Claim Status & remarks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"approvedAmount\":300,\r\n  \"status\": \"SETTLED\",\r\n  \"remarks\": \"Amount will be credited in 3 working days\"\r\n}\r\n\r\n// if SETTLED put  \"approvedAmount\":200, else its optional",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8097/claim/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Claim",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8097/claim"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Claim By ClaimId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8097/claim/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Claim By PolicyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8097/claim/policy/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Claim By CustomerId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8097/claim/customer/1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
