@@ -10,9 +10,11 @@ export interface Policy {
   automobileID: number,
   customerId: number,
   premiumAmount: number,
+  premiumFrequency: string,
   coverageAmount: number,
   startDate: string,
   endDate: string,
+  renewalDate: string,
   status: string
 }
 

@@ -329,3 +329,48 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+
+/* add images */
+
+.add-proof-btn {
+  /* Matches your Title Orange */
+  /* color: #ff8c33;  */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-proof-btn mat-icon {
+  font-size: 28px; /* Slightly larger for better accessibility */
+  width: 28px;
+  height: 28px;
+}
+
+.add-proof-btn:hover {
+  /* Modern rotation effect on hover */
+  /* transform: scale(1.1) rotate(90deg);  */
+  /* Slightly lighter orange on hover */
+  /* color: #ffa45e; */
+  /* Subtle orange glow */
+  /* filter: drop-shadow(0 0 8px rgba(255, 140, 51, 0.4));  */
+}
+
+.add-proof-btn:active {
+  transform: scale(0.95);
+}
+
+/* Optional: Pulse animation to draw attention if no images exist */
+.pulse-orange {
+  animation: orange-glow 2s infinite;
+  border-radius: 50%;
+}
+
+@keyframes orange-glow {
+  0% { box-shadow: 0 0 0 0 rgba(255, 140, 51, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 140, 51, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 140, 51, 0); }
+}

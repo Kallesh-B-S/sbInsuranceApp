@@ -50,4 +50,21 @@ export class CreateClaim {
       tap(response => console.log('Claim submitted successfully:', response))
     );
   }
+
+  addImages(files: File[], claimId: string) {
+    const formData = new FormData();
+
+    // 'files' is the array passed from the modal
+    if (files && files.length > 0) {
+      files.forEach((file: File) => {
+        // The key 'images' must match your Spring Boot @RequestParam("images")
+        formData.append('images', file, file.name);
+      });
+    }
+
+    // Ensure claimId is valid before sending
+    return this.http.post(`${environment.claimApiUrl}/claim/addImages/${claimId}`, formData).pipe(
+      tap(response => console.log('Images uploaded successfully:', response))
+    );
+  }
 }

@@ -10,7 +10,18 @@
     <div class="header-content">
       <span class="badge badge-active">{{ d.policy.status }}</span>
       <h1>{{ d.policy.policyName }}</h1>
-      <p class="subtitle">Policy ID: <span class="mono">{{ d.policy.policyNumber }}</span></p>
+      <!-- <p class="subtitle">Policy ID: <span class="mono">{{ d.policy.policyNumber }}</span></p>
+      <p class="mono-2-subtitle">Policy ID: <span class="mono-2">{{ d.policy.premiumFrequency }}</span></p> -->
+      <!-- <h3>Premium Frequency : {{d.policy.premiumFrequency}}</h3> -->
+      <div class="mono-container">
+        <div class="subtitle">Policy ID &nbsp;</div>
+        <div class="mono">{{ d.policy.policyNumber }}</div>
+      </div>
+
+      <!-- <div class="mono-container">
+        <div class="subtitle">Premium Frequency &nbsp;</div>
+        <div class="mono">{{ d.policy.premiumFrequency }}</div>
+      </div> -->
     </div>
   </div>
 
@@ -33,6 +44,15 @@
             {{ d.policy.startDate }} — {{ d.policy.endDate }}
           </div>
         </div>
+
+        <div class="info-box wide">
+          <span class="label">Premium Frequency</span>
+          <div class="value-small">{{d.policy.premiumFrequency}}</div>
+        </div>
+        <div class="info-box wide">
+          <span class="label">Renewal Date</span>
+          <div class="value-small">{{d.policy.renewalDate}}</div>
+        </div>
       </div>
     </div>
 
@@ -43,18 +63,28 @@
           <span class="label">Make / Model / Year</span>
           <div class="value">{{ d.automobile.make }} / {{ d.automobile.made }} / {{ d.automobile.year }}</div>
         </div>
-        
+
+        <div class="previous-ins-box info-box-custom">
+          <span class="label">License Plate Number</span>
+          <div class="value-small text-muted">{{ d.automobile.licensePlateNumber }}</div>
+        </div>
+
+        <div class="previous-ins-box info-box-custom">
+          <span class="label">Vehicle Identification Number</span>
+          <div class="value-small text-muted">{{ d.automobile.vehicleIdentificationNumber }}</div>
+        </div>
+
         <div class="previous-ins-box">
           <span class="label">Previous Provider Record</span>
           @if(d.automobile.previousInsurance) {
-            <div class="value-small highlight-text">
-              <strong>{{ d.automobile.previousInsurance.company }}</strong> 
-              <span class="text-secondary">
-                ({{ d.automobile.previousInsurance.lastClaimAmount | currency }})
-              </span>
-            </div>
+          <div class="value-small highlight-text">
+            <strong>{{ d.automobile.previousInsurance.company }}</strong>
+            <span class="text-secondary">
+              ({{ d.automobile.previousInsurance.lastClaimAmount | currency }})
+            </span>
+          </div>
           } @else {
-            <div class="value-small text-muted">No previous record found</div>
+          <div class="value-small text-muted">No previous record found</div>
           }
         </div>
       </div>
@@ -62,7 +92,7 @@
   </div>
 </div>
 } @else {
-  <div class="loading-state">
-    <p>Loading policy data...</p>
-  </div>
+<div class="loading-state">
+  <p>Loading policy data...</p>
+</div>
 }

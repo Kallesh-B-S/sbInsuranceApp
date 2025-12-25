@@ -73,8 +73,21 @@
   </div>
 
   <div class="glass-card">
-    <h2 class="section-title">
+    <!-- <h2 class="section-title">
       <mat-icon>photo_library</mat-icon> Uploaded Proofs
+    </h2> -->
+
+    <h2 class="section-title"
+      style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div
+        style="display: flex; align-items: center; gap: 10px; color: #ff8c33; font-weight: 700; letter-spacing: -0.5px;">
+        <mat-icon>photo_library</mat-icon>
+        <span>Uploaded Proofs</span>
+      </div>
+
+      <button mat-icon-button (click)="openAddImagesModal()" class="add-proof-btn" aria-label="Add new proof">
+        <mat-icon>add_circle</mat-icon>
+      </button>
     </h2>
 
     <div class="gallery-grid">

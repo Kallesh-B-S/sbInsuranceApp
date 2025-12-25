@@ -16,6 +16,8 @@ export interface Automobile {
   make: string;
   made: string;
   year: string;
+  licensePlateNumber: string;
+  vehicleIdentificationNumber: string,
   previousInsurance: PreviousInsurance | null; // Handle potential nulls
 }
 
@@ -26,9 +28,11 @@ export interface PolicyDetails {
   automobileID: number;
   customerId: number;
   premiumAmount: number;
+  premiumFrequency: string,
   coverageAmount: number;
   startDate: string;
   endDate: string;
+  renewalDate: string,
   status: string;
 }
 

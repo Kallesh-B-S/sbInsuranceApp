@@ -1,0 +1,52 @@
+<div class="pro-modal-dark">
+  <button class="close-btn" (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="modal-content-wrapper">
+    <header class="modal-header">
+      <div class="icon-container"><mat-icon>add_a_photo</mat-icon></div>
+      <div class="title-group">
+        <h1>Add Proofs</h1>
+        <!-- <p>Claim <span class="policy-id">#{{data.claimId}}</span></p> -->
+      </div>
+    </header>
+
+    <div class="form-body">
+      <div class="field-wrapper">
+        <label>Supporting Images</label>
+        
+        <div class="upload-container" [class.has-content]="selectedFiles.length > 0">
+          <input #fileInput type="file" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png" multiple hidden>
+
+          <div class="upload-placeholder" *ngIf="selectedFiles.length === 0" (click)="fileInput.click()">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Click to upload</span>
+          </div>
+
+          <div class="preview-scroll-area custom-scrollbar" *ngIf="selectedFiles.length > 0">
+            <div class="preview-grid">
+              <div class="preview-item" *ngFor="let file of previewUrls; let i = index">
+                <img [src]="file" alt="Preview">
+                <button class="remove-img" (click)="removeImage(i, $event)" type="button">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+
+              <div class="add-more-box" (click)="fileInput.click()">
+                <mat-icon>add</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="modal-footer">
+      <button class="cancel-link" (click)="onCancel()">Cancel</button>
+      <button class="submit-action" (click)="onUpload()" [disabled]="selectedFiles.length === 0">
+        Upload {{selectedFiles.length}} Files
+      </button>
+    </footer>
+  </div>
+</div>

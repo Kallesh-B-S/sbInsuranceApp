@@ -52,6 +52,7 @@ export class Dashboard {
     'policyName',
     // 'automobileID', 
     'premiumAmount',
+    // 'premiumFrequency',
     'coverageAmount',
     'status',
     "actions"];
