@@ -33,10 +33,12 @@ export class ApplyClaimModal {
     incidentDate: ""
   };
 
+  today: string = new Date().toISOString().split('T')[0];
+
   constructor(
     private datePipe: DatePipe,
     public dialogRef: MatDialogRef<ApplyClaimModal>,
-    @Inject(MAT_DIALOG_DATA) public data: { policyNumber: string }
+    @Inject(MAT_DIALOG_DATA) public data: { policyNumber: string, startDate: string }
   ) { }
 
   onCancel(): void {
@@ -109,9 +111,18 @@ export class ApplyClaimModal {
     this.previewUrls.splice(index, 1);
   }
 
+  // Logic to check if the date is within range
+  isDateInvalid(): boolean {
+    const selected = this.claimData.incidentDate;
+    if (!selected) return false;
+
+    const startDate = this.data.startDate; // Expecting YYYY-MM-DD from policy
+    return selected < startDate || selected > this.today;
+  }
+
   // Update your onSubmit to include the files
   onSubmit(): void {
-    if (this.claimData.requestedAmount && this.claimData.description && this.claimData.incidentDate) {
+    if (!this.isDateInvalid() && this.claimData.requestedAmount && this.claimData.description && this.claimData.incidentDate) {
       this.dialogRef.close({
         policyId: this.data.policyNumber,
         ...this.claimData,

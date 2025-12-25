@@ -30,6 +30,10 @@
         </div>
       </div>
 
+      <small *ngIf="isDateInvalid()" style="color: #ff4d4d; margin-top: 5px; display: block;">
+        Date must be between {{data.startDate | date:'dd/MM/yyyy'}} and Today.
+      </small>
+
       <div class="field-wrapper">
         <label>Reason for Claim</label>
         <div class="input-container">
@@ -69,7 +73,7 @@
     <footer class="modal-footer">
       <button class="cancel-link" (click)="onCancel()">Cancel</button>
       <button class="submit-action" (click)="onSubmit()"
-        [disabled]="!claimData.requestedAmount || !claimData.description || !claimData.incidentDate">
+        [disabled]="!claimData.requestedAmount || !claimData.description || !claimData.incidentDate || isDateInvalid()">
         Submit
       </button>
     </footer>

@@ -100,7 +100,10 @@ export class Dashboard {
     const dialogRef = this.dialog.open(ApplyClaimModal, {
       width: '500px',
       maxWidth: '95vw',
-      data: { policyNumber: policy.id },
+      data: { 
+        policyNumber: policy.id,
+        startDate: policy.startDate
+      },
       panelClass: 'shield-dialog-overlay'
     });
 
