@@ -1,0 +1,112 @@
+[
+    {
+        "fullName": "John Doe",
+        "dob": "1990-05-15",
+        "city": "New York",
+        "state": "NY",
+        "country": "USA",
+        "zipCode": "10001",
+        "email": "john.doe@example.com",
+        "phone": "1234567890",
+        "password": "password"
+    },
+    {
+        "fullName": "Jane Smith",
+        "dob": "1988-11-22",
+        "city": "Los Angeles",
+        "state": "CA",
+        "country": "USA",
+        "zipCode": "90001",
+        "email": "jane.smith@example.com",
+        "phone": "2345678901",
+        "password": "password"
+    },
+    {
+        "fullName": "Amit Sharma",
+        "dob": "1995-03-10",
+        "city": "Mumbai",
+        "state": "MH",
+        "country": "India",
+        "zipCode": "400001",
+        "email": "amit.sharma@example.in",
+        "phone": "9876543210",
+        "password": "password"
+    },
+    {
+        "fullName": "Marie Dubois",
+        "dob": "1992-07-30",
+        "city": "Paris",
+        "state": "IDF",
+        "country": "France",
+        "zipCode": "75001",
+        "email": "m.dubois@example.fr",
+        "phone": "3312345678",
+        "password": "password"
+    },
+    {
+        "fullName": "Yuki Tanaka",
+        "dob": "1994-01-12",
+        "city": "Tokyo",
+        "state": "TK",
+        "country": "Japan",
+        "zipCode": "100-0001",
+        "email": "yuki.t@example.jp",
+        "phone": "8190123456",
+        "password": "password"
+    },
+    {
+        "fullName": "Carlos Ruiz",
+        "dob": "1985-09-05",
+        "city": "Madrid",
+        "state": "MD",
+        "country": "Spain",
+        "zipCode": "28001",
+        "email": "c.ruiz@example.es",
+        "phone": "3491234567",
+        "password": "password"
+    },
+    {
+        "fullName": "Sarah Connor",
+        "dob": "1984-12-12",
+        "city": "Austin",
+        "state": "TX",
+        "country": "USA",
+        "zipCode": "73301",
+        "email": "s.connor@example.com",
+        "phone": "5125550199",
+        "password": "password"
+    },
+    {
+        "fullName": "Liam Wilson",
+        "dob": "1991-06-25",
+        "city": "London",
+        "state": "ENG",
+        "country": "UK",
+        "zipCode": "SW1A 1AA",
+        "email": "liam.w@example.co.uk",
+        "phone": "4420794609",
+        "password": "password"
+    },
+    {
+        "fullName": "Chen Wei",
+        "dob": "1993-08-18",
+        "city": "Beijing",
+        "state": "BJ",
+        "country": "China",
+        "zipCode": "100000",
+        "email": "chen.wei@example.cn",
+        "phone": "8610123456",
+        "password": "password"
+    },
+    {
+        "fullName": "Elena Petrova",
+        "dob": "1990-02-28",
+        "city": "Moscow",
+        "state": "MC",
+        "country": "Russia",
+        "zipCode": "101000",
+        "email": "e.petrova@example.ru",
+        "phone": "7495123456",
+        "password": "password"
+    }
+]
