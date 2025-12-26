@@ -14,7 +14,46 @@ export interface Claim {
   incidentDate: string;
   status: 'SUBMITTED' | 'APPROVED' | 'REJECTED' | 'PENDING'; // Using a union type for better safety
   remarks: string;
-  images:[];
+  images: [];
+}
+
+
+export interface PreviousInsurance {
+  company: string;
+  lastClaimAmount: number;
+  currency: string;
+  policyExpired: string;
+}
+
+export interface Automobile {
+  id: number;
+  customerId: number;
+  make: string;
+  made: string;
+  year: string;
+  licensePlateNumber: string;
+  vehicleIdentificationNumber: string,
+  previousInsurance: PreviousInsurance | null; // Handle potential nulls
+}
+
+export interface PolicyDetails {
+  id: number;
+  policyNumber: string;
+  policyName: string;
+  automobileID: number;
+  customerId: number;
+  premiumAmount: number;
+  premiumFrequency: string,
+  coverageAmount: number;
+  startDate: string;
+  endDate: string;
+  renewalDate: string,
+  status: string;
+}
+
+export interface PolicyResponse {
+  policy: PolicyDetails;
+  automobile: Automobile;
 }
 
 @Injectable({
@@ -29,6 +68,8 @@ export class ClaimData {
   // Signal to store a single active claim detail
   activeClaim = signal<Claim | null>(null);
 
+  activeClaimPolicyData = signal<PolicyResponse | null>(null);
+
   /**
    * Fetch all claims for a specific customer
    */
@@ -37,6 +78,17 @@ export class ClaimData {
       .pipe(
         tap(data => this.claims.set(data))
       );
+  }
+
+  fetchPolicyDetailForClaim(policyId: string) {
+    const url = `${environment.policyApiUrl}/policy/${policyId}/automobile`;
+
+    return this.http.get<PolicyResponse>(url).pipe(
+      tap((response) => {
+        console.log('Detail fetched:', response);
+        this.activeClaimPolicyData.set(response);
+      })
+    );
   }
 
   /**

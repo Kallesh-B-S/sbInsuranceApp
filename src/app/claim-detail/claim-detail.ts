@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddClaimImages } from '../add-claim-images/add-claim-images';
 import { CreateClaim } from '../create-claim';
 import { UserService } from '../customer-profile';
+import { lastValueFrom, switchMap } from 'rxjs';
 
 
 interface GalleryImage {
@@ -26,6 +27,7 @@ export class ClaimDetail {
 
   private userService = inject(UserService);
   userRole = this.userService.userRole();
+  userData = this.userService.currentUser();
 
 
   // Signal for the Claim ID from the URL
@@ -35,13 +37,64 @@ export class ClaimDetail {
 
   data = this.claimData.activeClaim;
 
+  policyData = this.claimData.activeClaimPolicyData();
+
   claimId = signal<string | null>(null);
 
-  ngOnInit() {
+  // ngOnInit() {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   this.claimId.set(id);
+  //   this.claimData.getClaimById(this.claimId() ?? "").subscribe();
+  //   this.claimData.fetchPolicyDetailForClaim(`${this.data()?.policyId ?? ""}`).subscribe();
+  // }
+
+  async getClaimData() {
+  }
+
+  async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.claimId.set(id);
     this.claimData.getClaimById(this.claimId() ?? "").subscribe();
+
+    await lastValueFrom(
+      this.claimData.getClaimById(this.claimId() ?? "")
+    );
+    // await this.getClaimData();
+
+    console.log("policyID is : --------- ", this.data()?.policyId);
+    await lastValueFrom(
+      this.claimData.fetchPolicyDetailForClaim(`${this.data()?.policyId ?? ""}`)
+    )
   }
+
+
+
+  // ngOnInit() {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   this.claimId.set(id);
+
+  //   // 1. Start with the first call
+  //   this.claimData.getClaimById(this.claimId() ?? "").pipe(
+  //     switchMap((claimResponse) => {
+  //       console.log("hello while loading .... ");
+
+  //       // 2. This code runs ONLY after getClaimById finishes.
+  //       // 3. Extract the policyId from the response (adjust 'policyId' to match your actual API object key)
+  //       const policyId = claimResponse?.policyId ?? "";
+
+  //       // 4. Return the second observable to "switch" to it
+  //       return this.claimData.fetchPolicyDetailForClaim(String(policyId));
+  //     })
+  //   ).subscribe({
+  //     next: (policyDetail) => {
+  //       // 5. This will finally contain the data from the policy detail call
+  //       console.log('Policy Details Loaded:', policyDetail);
+  //     },
+  //     error: (err) => {
+  //       console.error('Error in the sequence:', err);
+  //     }
+  //   });
+  // }
 
   // data() {
   //   return {

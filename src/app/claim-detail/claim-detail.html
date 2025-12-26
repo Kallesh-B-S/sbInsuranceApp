@@ -20,18 +20,103 @@
     </div>
   </div>
 
-  <div class="full-width-info">
-    <span class="label">Claim Description</span>
-    <div class="value-text">
-      {{data()?.description}}
+  <div class="glass-card">
+    <h2 class="section-title">
+      <mat-icon>account_circle</mat-icon> Policyholder Details
+    </h2>
+    <div class="user-grid">
+      <div class="info-box">
+        <span class="label">Full Name</span>
+        <div class="value">{{userData?.fullName}}</div>
+      </div>
+      <div class="info-box">
+        <span class="label">Email Address</span>
+        <div class="value">{{userData?.email}}</div>
+      </div>
+      <div class="info-box">
+        <span class="label">Phone Number</span>
+        <div class="value">{{userData?.phone}}</div>
+      </div>
+      <div class="info-box">
+        <span class="label">Location</span>
+        <div class="value">{{userData?.city}},{{userData?.state}},{{userData?.country}} {{userData?.zipCode}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card">
+    <div class="section-header-inline">
+      <h2 class="section-title"><mat-icon>verified_user</mat-icon> Policy Information</h2>
+      <span class="badge badge-active">{{policyData?.policy?.status}}</span>
+    </div>
+
+    <div class="policy-master-grid">
+      <div class="policy-sub-section">
+        <div class="info-grid-internal">
+          <div class="info-box">
+            <span class="label">Policy Number</span>
+            <div class="value">{{policyData?.policy?.policyNumber}}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Plan Name</span>
+            <div class="value">{{policyData?.policy?.policyName}}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Coverage</span>
+            <div class="value">{{policyData?.policy?.coverageAmount | currency:'USD'}}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Premium</span>
+            <div class="value">{{policyData?.policy?.premiumAmount | currency:'USD'}} <small class="text-muted">/
+                {{policyData?.policy?.premiumFrequency}}</small></div>
+          </div>
+          <div class="info-box">
+            <span class="label">Period</span>
+            <div class="value-small">{{policyData?.policy?.startDate}} - {{policyData?.policy?.endDate}}</div>
+          </div>
+          <div class="info-box">
+            <span class="label">Renewal Date</span>
+            <div class="value-small">{{policyData?.policy?.renewalDate}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-sub-section border-left-divider">
+        <h3 class="sub-heading"><mat-icon>directions_car</mat-icon> Insured Vehicle</h3>
+        <div class="info-grid-internal">
+          <div class="info-box">
+            <span class="label">Make/Model (year)</span>
+            <div class="value">{{policyData?.automobile?.make}} {{policyData?.automobile?.made}}
+              ({{policyData?.automobile?.year}})</div>
+          </div>
+          <div class="info-box">
+            <span class="label">License Plate Number</span>
+            <div class="value">{{policyData?.automobile?.licensePlateNumber}}</div>
+          </div>
+          <div class="info-box full-width">
+            <span class="label">Vehicle Identification Number (VIN)</span>
+            <div class="value-mono">{{policyData?.automobile?.vehicleIdentificationNumber}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prev-insurance-footer">
+      <mat-icon>history</mat-icon>
+      <span>Previously insured by <strong>{{policyData?.automobile?.previousInsurance?.company}}</strong>. Last claim:
+        {{policyData?.automobile?.previousInsurance?.lastClaimAmount | currency:'USD'}} (Expired:
+        {{policyData?.automobile?.previousInsurance?.policyExpired | date:'mediumDate'}})</span>
     </div>
   </div>
 
   <div class="full-width-info">
+    <span class="label">Claim Description</span>
+    <div class="value-text">{{data()?.description}}</div>
+  </div>
+
+  <div class="full-width-info">
     <span class="label">Remarks</span>
-    <div class="value-text italic">
-      {{data()?.remarks}}
-    </div>
+    <div class="value-text italic">{{data()?.remarks}}</div>
   </div>
 
   <div class="detail-grid-layout">
@@ -39,20 +124,15 @@
       <h2 class="section-title">
         <mat-icon>account_balance_wallet</mat-icon> Settlement Summary
       </h2>
-
       <div class="payout-hero">
         <span class="label">Estimated Payout</span>
-        <!-- <div>&nbsp;</div> -->
         <div class="main-value">
           {{ (data()?.approvedAmount | currency:'USD':'symbol':'1.2-2') || "---" }}
         </div>
-        <!-- <div>&nbsp;</div> -->
       </div>
-
       <div class="info-grid-internal">
         <div class="info-box">
           <span class="label">Repair Amount</span>
-          <!-- <div class="value-small">$4,500.00</div> -->
           <div class="value-small">{{ data()?.requestedAmount | currency:'USD':'symbol':'1.2-2' }}</div>
         </div>
       </div>
@@ -65,7 +145,6 @@
       <div class="info-grid-internal">
         <div class="info-box">
           <span class="label">Date of Incident</span>
-          <!-- <div class="value">Oct 12, 2024</div> -->
           <div class="value">{{ data()?.incidentDate | date:'mediumDate' }}</div>
         </div>
       </div>
@@ -73,20 +152,13 @@
   </div>
 
   <div class="glass-card">
-    <!-- <h2 class="section-title">
-      <mat-icon>photo_library</mat-icon> Uploaded Proofs
-    </h2> -->
-
-    <h2 class="section-title"
-      style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <div
-        style="display: flex; align-items: center; gap: 10px; color: #ff8c33; font-weight: 700; letter-spacing: -0.5px;">
+    <h2 class="section-title-header">
+      <div class="title-left">
         <mat-icon>photo_library</mat-icon>
         <span>Uploaded Proofs</span>
       </div>
-
       @if(userRole === 'customer'){
-      <button mat-icon-button (click)="openAddImagesModal()" class="add-proof-btn" aria-label="Add new proof">
+      <button mat-icon-button (click)="openAddImagesModal()" class="add-proof-btn">
         <mat-icon>add_circle</mat-icon>
       </button>
       }
@@ -95,8 +167,7 @@
     <div class="gallery-grid">
       @for (img of data()?.images; track img) {
       <div class="gallery-item">
-        <img [src]="baseUrl + img" alt="Image">
-
+        <img [src]="baseUrl + img" alt="Proof">
         <div class="img-overlay">
           <button class="action-btn view-btn" (click)="viewImage(img)">
             <mat-icon>visibility</mat-icon> VIEW
@@ -105,11 +176,8 @@
             <mat-icon>download</mat-icon> DOWNLOAD
           </button>
         </div>
-
-        <div class="file-name-label"></div>
       </div>
-      }
-      @empty {
+      } @empty {
       <div class="empty-state">No proofs uploaded yet.</div>
       }
     </div>
@@ -120,5 +188,3 @@
   <p>Loading claim details...</p>
 </div>
 }
-
-<!-- gal -->
