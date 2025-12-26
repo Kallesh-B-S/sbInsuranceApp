@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { AddClaimImages } from '../add-claim-images/add-claim-images';
 import { CreateClaim } from '../create-claim';
+import { UserService } from '../customer-profile';
 
 
 interface GalleryImage {
@@ -22,6 +23,9 @@ interface GalleryImage {
 })
 export class ClaimDetail {
   private route = inject(ActivatedRoute);
+
+  private userService = inject(UserService);
+  userRole = this.userService.userRole();
 
 
   // Signal for the Claim ID from the URL

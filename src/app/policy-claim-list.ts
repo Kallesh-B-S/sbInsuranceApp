@@ -34,6 +34,17 @@ export class PolicyClaimList {
     );
   }
 
+  getAllClaims() {
+    return this.http.get<Claim[]>(`${environment.claimApiUrl}/claim`).pipe(
+      tap(claims => {
+        console.log('Policies successfully fetched:', claims);
+        this.currentPolicyClaims.set(claims);
+      })
+    );
+  }
+
+
+
   clearPolicyClaims() {
     this.currentPolicyClaims.set([]);
   }

@@ -85,9 +85,11 @@
         <span>Uploaded Proofs</span>
       </div>
 
+      @if(userRole === 'customer'){
       <button mat-icon-button (click)="openAddImagesModal()" class="add-proof-btn" aria-label="Add new proof">
         <mat-icon>add_circle</mat-icon>
       </button>
+      }
     </h2>
 
     <div class="gallery-grid">

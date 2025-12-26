@@ -27,11 +27,24 @@ export class UserService {
 
   currentUser = signal<CustomerProfile | null>(null);
 
+  allowedPaths = signal<string[] | null>(null);
+
+  userRole = signal<string | null>(null);
+
   fetchAndStoreUser(email: string) {
     return this.http.get<CustomerProfile>(`${environment.customerApiUrl}/customer/email/${email}`).pipe(
       tap(user => {
         console.log('User data successfully fetched:', user);
         this.currentUser.set(user);
+
+        if(this.keycloak.hasRealmRole('adjuster')){
+          this.allowedPaths.set(['validate-claims','claim']);
+          this.userRole.set('adjuster');
+        }
+        else{
+          this.allowedPaths.set(['home','policy','claims','claim'])
+          this.userRole.set('customer');
+        }
       }),
       catchError((error: HttpErrorResponse) => {
         // 1. Alert the user

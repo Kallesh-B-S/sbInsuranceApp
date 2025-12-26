@@ -1,19 +1,21 @@
-import { Component, signal, computed, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PolicyClaimList } from '../policy-claim-list';
 import { UserService } from '../customer-profile';
 
 @Component({
-  selector: 'app-claims',
-  standalone: true,
+  selector: 'app-valiadte-claims',
   imports: [CommonModule, MatTableModule, MatIconModule, RouterModule],
-  templateUrl: './claims.html',
-  styleUrl: './claims.css' // Reuse your existing dashboard.css
+  templateUrl: './valiadte-claims.html',
+  styleUrl: './valiadte-claims.css',
 })
-export class Claims {
+export class ValiadteClaims {
+
+  private userService = inject(UserService);
+  userRole = this.userService.userRole();
 
   // constructor(private location: Location) {}
 
@@ -28,7 +30,7 @@ export class Claims {
     'incidentDate',
     'claimStatus',
     'remarks'
-    ,'actions'
+    , 'actions'
   ];
   statusFilter = signal('');
 
@@ -44,7 +46,7 @@ export class Claims {
     const id = this.route.snapshot.paramMap.get('id');
     this.policyId.set(id);
 
-    this.policyClaimList.fetchAllClaimsByPolicyId(this.policyId() ?? "").subscribe();
+    this.policyClaimList.getAllClaims().subscribe();
     console.log(this.policyClaimList.currentPolicyClaims());
   }
 
